@@ -7,7 +7,7 @@ Gem::Specification.new do |s|
   s.summary = %q{Provides support MultiTech's FaxFinder server}
   s.homepage = %q{http://github.com/erichhorde/fax_finder}
   s.description = %q{Provides base access for sending faxes and querying MultiTech's FaxFinder server.}
-  s.files = [ "README", 
+  s.files = [ "README.rdoc", 
               "Changelog", 
               "LICENSE", 
               "lib/fax_finder.rb",
