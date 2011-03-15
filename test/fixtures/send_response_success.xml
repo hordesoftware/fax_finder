@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<response>
+  <message>Success</message>
+  <fax_entry>
+    <fax_entry_url>https://192.168.2.1/ffws/v1/ofax/0000001B/0000</fax_entry_url>
+    <fax_url>https://192.168.2.1/ffws/v1/ofax/0000001B</fax_url>
+    <state>preprocessing</state>
+    <schedule_message>New fax entry</schedule_message>
+    <created>2008-08-01 08:43:29</created>
+    <stime>2008-08-01 08:52:29</stime>
+    <try_number>1</try_number>
+    <agent>FFWS</agent>
+    <preview>https://192.168.2.1/ffws/v1/data/preview/0000001B-0000.pdf</preview>
+    <cover_page>
+      <url>https://192.168.2.1/ffws/v1/data/cover_pages/default.pdf</url>
+      <enabled>true</enabled>
+      <subject>Test Subject</subject>
+      <comments>Test Message</comments>
+    </cover_page>
+    <sender>
+      <username>admin</username>
+      <name>Sender Name</name>
+      <organization>Sender Org</organization>
+      <phone_number>218-555-3333</phone_number>
+      <fax_number>218-555-3334</fax_number>
+      <email_address>sender@example.com</email_address>
+    </sender>
+    <recipient>
+      <name>Rcpt 1 Name</name>
+      <organization>Rcpt 1 Org</organization>
+      <fax_number>218-555-3335</fax_number>
+      <phone_number>218-555-3336</phone_number>
+    </recipient>
+    <max_tries>3</max_tries>
+    <priority>3</priority>
+    <try_interval>30</try_interval>
+    <receipt>failure</receipt>
+    <receipt_attachment>none</receipt_attachment>
+    <pages>0</pages>
+    <approver></approver>
+    <approval_time></approval_time>
+  </fax_entry>
+</response>

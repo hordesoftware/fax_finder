@@ -14,9 +14,12 @@ begin
     gem.email = "erich@hordesoftware.com"
     gem.homepage = "http://github.com/erichhorde/fax_finder"
     gem.rubyforge_project = "fax_finder"
-    
+
+    gem.add_dependency('nokogiri', '1.4.4')
+    gem.add_dependency('builder', '~> 2.1.2')
     gem.add_development_dependency('test-unit', '~> 2')
     gem.add_development_dependency('mocha', '>= 0.9')
+
   end
 
   # Jeweler::RubyforgeTasks.new do |rubyforge|

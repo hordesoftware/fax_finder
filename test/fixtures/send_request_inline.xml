@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schedule_fax>
+  <cover_page>
+    <url>https://192.168.2.1/ffws/v1/data/cover_pages/default.pdf</url>
+    <enabled>true</enabled>
+    <subject>Test Subject</subject>
+    <comments>Test Message</comments>
+  </cover_page>
+  <sender>
+    <name>Sender Name</name>
+    <organization>Sender Org</organization>
+    <phone_number>218-555-3333</phone_number>
+    <fax_number>218-555-3334</fax_number>
+    <email_address>sender@example.com</email_address>
+  </sender>
+  <recipient>
+    <name>Rcpt 1 Name</name>
+    <organization>Rcpt 1 Org</organization>
+    <fax_number>-218-555-3335</fax_number>
+    <phone_number>218-555-3336</phone_number>
+  </recipient>
+  <attachment>
+    <location>inline</location>
+    <name>attachment1.txt</name>
+    <content_type>text/plain</content_type>
+    <content_transfer_encoding>base64</content_transfer_encoding>
+    <content>dGVzdA==</content>
+  </attachment>
+  <max_tries>3</max_tries>
+  <priority>3</priority>
+  <try_interval>30</try_interval>
+  <receipt>failure</receipt>
+  <receipt_attachment>none</receipt_attachment>
+  <schedule_all_at>2008-08-07T20:30:00</schedule_all_at>
+</schedule_fax>

@@ -3,6 +3,9 @@ gem 'test-unit', '~> 2'
 require 'test/unit'
 gem 'mocha'
 require 'mocha'
+require 'nokogiri'
+require 'builder'
+  
 require File.join( File.dirname(__FILE__), '..','lib', 'fax_finder.rb')
 
 class Class

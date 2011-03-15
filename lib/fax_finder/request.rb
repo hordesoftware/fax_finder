@@ -10,6 +10,7 @@ module FaxFinder
     end
   end
   class Request
+    TIME_FORMAT="%Y-%m-%dT%H:%M:%S"
   end    
 end
 
