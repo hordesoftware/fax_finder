@@ -1,1 +1,1 @@
-require File.join( File.dirname(__FILE__), 'fax_finder','server.rb')
+require File.join( File.dirname(__FILE__), 'fax_finder','request.rb')

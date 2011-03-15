@@ -11,9 +11,9 @@ Gem::Specification.new do |s|
               "Changelog", 
               "LICENSE", 
               "lib/fax_finder.rb",
-              'lib/fax_finder/server.rb']
+              'lib/fax_finder/request.rb']
   s.test_files = [
-      "test/server_test.rb",
+      "test/request_test.rb",
        "test/test_helper.rb"
   ]              
   s.required_ruby_version = '>= 1.8.7'
