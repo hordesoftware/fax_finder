@@ -1,30 +1,35 @@
 require File.dirname(__FILE__) + '/test_helper'
 
 module FaxFinder
-  class SendTest<Test::Unit::TestCase
+  OPTIONS={:subject=>'Something',
+    :comment=>'Comment',
+    :recipient_name=>'recipient_name',
+    :recipient_organization=>'recipient_organization',
+    :recipient_phone_number=>'5647382910',
+    :sender_fax_number=>'0123456789',
+    :sender_name=>'sender_name',
+    :sender_organization=>'sender_organization',
+    :sender_phone_number=>'0987654321',
+    :schedule_all_at=>Time.now.utc
+  }
+  
+  class SendPostTest<Test::Unit::TestCase
+    def setup
+      Request.configure('example.com', 'user', 'password')
+    end
+    
     def test_post
-      Send.post
+      Send.post('user', 'password')
     end
     
     def test_posts_returns_response
-      assert_instance_of(FaxFinder::Response, Send.post)
+      assert_instance_of(FaxFinder::Response, Send.post(nil, nil))
     end
   end
+
   class SendConstructXMLTest<Test::Unit::TestCase
     def setup
-      @options={:subject=>'Something',
-        :comment=>'Comment',
-        :recipient_name=>'recipient_name',
-        :recipient_organization=>'recipient_organization',
-        :recipient_phone_number=>'5647382910',
-        :sender_fax_number=>'0123456789',
-        :sender_name=>'sender_name',
-        :sender_organization=>'sender_organization',
-        :sender_phone_number=>'0987654321',
-        :schedule_all_at=>Time.now.utc
-      }
-        
-      @doc=Nokogiri::XML(Send.construct_xml('1234567890', 'https://localhost/something', @options))
+      @doc=Nokogiri::XML(Send.construct_xml('1234567890', 'https://localhost/something', OPTIONS))
     end
     
     def test_returns_string_and_doesnt_blow_up
@@ -84,10 +89,38 @@ module FaxFinder
     end
 
     def test_converts_to_utc
-      @doc=Nokogiri::XML(Send.construct_xml('1234567890', 'https://localhost/something', @options.merge(:schedule_all_at=>Time.now)))
+      @doc=Nokogiri::XML(Send.construct_xml('1234567890', 'https://localhost/something', OPTIONS.merge(:schedule_all_at=>Time.now)))
       assert_equal(Time.now.utc.strftime(Request::TIME_FORMAT), @doc.xpath('//schedule_fax/schedule_all_at').text)
     end
 
   end
   
+  class RequestConstructHttpRequestTest<Test::Unit::TestCase
+    def setup
+      Request.configure('example.com', 'user', 'password')
+      @http_request=Send.construct_http_request('1234567890', 'https://localhost/something', OPTIONS)
+    end
+
+    def test_returns_a_post
+      assert_instance_of(Net::HTTP::Post, @http_request)
+    end
+    
+    def test_sets_body
+      assert_equal(Send.construct_xml('1234567890', 'https://localhost/something', OPTIONS), @http_request.body)
+    end
+    
+    def test_sets_path
+      assert_equal(SendConstants::PATH, @http_request.path)
+    end
+    
+    def test_sets_basic_auth
+      assert_not_nil(@http_request['authorization'])
+    end
+
+    def test_sets_content_type
+      assert_equal('text/xml', @http_request['Content-Type'])
+    end
+
+  end
+
 end

@@ -14,10 +14,12 @@ module FaxFinder
         @try_number=self.doc.xpath(XPATH_TRY_NUMBER).text.to_i
       end
     end
-    
+
     def extract_fax_and_entry_key(_url)
-      REGEXP_KEYS.match(_url)[1,2]
+      match=REGEXP_KEYS.match(_url)
+      match[1,2] if match
     end
+
   end
   
 end
