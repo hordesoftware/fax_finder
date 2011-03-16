@@ -95,7 +95,7 @@ module FaxFinder
 
   end
   
-  class RequestConstructHttpRequestTest<Test::Unit::TestCase
+  class SendConstructHttpRequestTest<Test::Unit::TestCase
     def setup
       Request.configure('example.com', 'user', 'password')
       @http_request=Send.construct_http_request('1234567890', 'https://localhost/something', OPTIONS)
@@ -110,7 +110,7 @@ module FaxFinder
     end
     
     def test_sets_path
-      assert_equal(SendConstants::PATH, @http_request.path)
+      assert_equal(Request::BASE_PATH, @http_request.path)
     end
     
     def test_sets_basic_auth

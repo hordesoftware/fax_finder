@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{fax_finder}
-  s.version = "0.0.0"
+  s.version = "0.1.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Erich L. Timkar"]
-  s.date = %q{2011-03-15}
+  s.date = %q{2011-03-16}
   s.email = %q{erich@hordesoftware.com}
   s.extra_rdoc_files = [
     "LICENSE",
@@ -25,7 +25,14 @@ Gem::Specification.new do |s|
      "fax_finder.gemspec",
      "lib/fax_finder.rb",
      "lib/fax_finder/request.rb",
+     "lib/fax_finder/response.rb",
+     "lib/fax_finder/send.rb",
+     "test/fixtures/send_request_external.xml",
+     "test/fixtures/send_request_inline.xml",
+     "test/fixtures/send_response_success.xml",
      "test/request_test.rb",
+     "test/response_test.rb",
+     "test/send_test.rb",
      "test/test_helper.rb"
   ]
   s.homepage = %q{http://github.com/erichhorde/fax_finder}
@@ -35,7 +42,8 @@ Gem::Specification.new do |s|
   s.rubygems_version = %q{1.3.7}
   s.summary = %q{Provides support MultiTech's FaxFinder server}
   s.test_files = [
-    "test/request_test.rb",
+    "test/query_test.rb",
+     "test/request_test.rb",
      "test/response_test.rb",
      "test/send_test.rb",
      "test/test_helper.rb"

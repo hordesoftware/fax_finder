@@ -2,22 +2,13 @@ require 'nokogiri'
 require 'builder'
 
 module FaxFinder
-  module SendConstants
-    PATH='/ffws/v1/ofax'
-  end
-
   module SendClassMethods
-    include FaxFinder::SendConstants
+
     def post(recipient_fax, external_url, options={})
-      response_body=nil
-      Net::HTTP.start(Request.host) { |http|  
-        http_request = construct_http_request(recipient_fax, external_url, options)
-        http_response = http.request(http_request)
-        response_body=http_response.body
+      super(){
+        construct_http_request(recipient_fax, external_url, options)
       }
-      return Response.new(Nokogiri::XML(response_body))
     end
-    
 
     def construct_xml(recipient_fax, external_url, options={})
       xml = ""
@@ -58,7 +49,7 @@ module FaxFinder
     end
     
     def construct_http_request(recipient_fax, external_url, options={})
-      request = Net::HTTP::Post.new(PATH)
+      request = Net::HTTP::Post.new(Request::BASE_PATH)
       request.basic_auth self.user, self.password
       request.body=construct_xml(recipient_fax, external_url, options)
       request.set_content_type(Request::CONTENT_TYPE)

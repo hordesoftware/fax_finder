@@ -2,6 +2,10 @@ require 'net/http'
 require 'net/https'
 
 module FaxFinder
+  module Constants
+    BASE_PATH='/ffws/v1/ofax'
+  end
+  
   module RequestClassMethods
     attr_reader :host, :user, :password, :ssl
     def configure(_host, _user, _password, _ssl=false)
@@ -12,6 +16,16 @@ module FaxFinder
       @host=@user=@password=nil
     end
 
+    def post
+      response_body=nil
+      Net::HTTP.start(Request.host) { |http|  
+        http_request = yield
+        http_response = http.request(http_request)
+        response_body=http_response.body
+      }
+      return Response.new(Nokogiri::XML(response_body))
+    end
+
     def formatted_fax_finder_time(time)
       result=nil
       if time
@@ -20,12 +34,10 @@ module FaxFinder
       result
     end
     
-    # def uri(path)
-    #   (self.ssl ? URI::HTTPS : URI::HTTP).build(:host=>self.host, :path=>path)
-    # end
   end
   
   class Request
+    include Constants
     TIME_FORMAT="%Y-%m-%dT%H:%M:%S"
     CONTENT_TYPE='text/xml'
   end    
